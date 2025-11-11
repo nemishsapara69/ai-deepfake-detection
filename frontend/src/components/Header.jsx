@@ -23,7 +23,9 @@ const Header = () => {
           
           <nav className="flex items-center gap-4">
             <a
-              href="#"
+              href="https://github.com/nemishsapara69/ai-deepfake-detection"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 bg-slate-700 hover:bg-slate-600 px-4 py-2 rounded-lg transition-colors text-sm"
             >
               <Github className="w-4 h-4" />

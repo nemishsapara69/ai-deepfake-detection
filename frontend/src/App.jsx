@@ -16,10 +16,27 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      
-      <main className="flex-grow container mx-auto px-4 py-8">
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
+      {/* Video Background */}
+      <div className="fixed inset-0 z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute w-full h-full object-cover opacity-20"
+        >
+          <source src="/background.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay for better readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/80"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col min-h-screen">
+        <Header />
+        
+        <main className="flex-grow container mx-auto px-4 py-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -112,6 +129,7 @@ function App() {
       </main>
 
       <Footer />
+      </div>
     </div>
   )
 }
