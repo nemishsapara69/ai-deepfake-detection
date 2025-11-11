@@ -16,7 +16,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col relative overflow-hidden">
+    <div className="min-h-screen flex flex-col relative overflow-hidden bg-slate-900">
       {/* Video Background */}
       <div className="fixed inset-0 z-0">
         <video
@@ -25,8 +25,10 @@ function App() {
           muted
           playsInline
           className="absolute w-full h-full object-cover opacity-20"
+          style={{ backgroundColor: '#0f172a' }}
         >
           <source src="/background.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
         {/* Overlay for better readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/80"></div>
