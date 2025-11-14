@@ -227,6 +227,110 @@ def health_check():
     })
 
 
+@app.route('/api/docs', methods=['GET'])
+def api_docs():
+    """API documentation endpoint"""
+    return jsonify({
+        'api_name': 'Deepfake Detection API',
+        'version': '1.0',
+        'description': 'REST API for detecting deepfakes using machine learning',
+        'base_url': 'http://localhost:5000',
+        'endpoints': {
+            '/': {
+                'method': 'GET',
+                'description': 'API information and available endpoints',
+                'parameters': [],
+                'response': {
+                    'message': 'string',
+                    'version': 'string',
+                    'status': 'string',
+                    'endpoints': 'object'
+                }
+            },
+            '/api/health': {
+                'method': 'GET',
+                'description': 'Check API health and component status',
+                'parameters': [],
+                'response': {
+                    'status': 'string',
+                    'model_loaded': 'boolean',
+                    'face_detector_loaded': 'boolean',
+                    'timestamp': 'string'
+                }
+            },
+            '/api/predict': {
+                'method': 'POST',
+                'description': 'Upload single image for deepfake detection',
+                'parameters': [
+                    {
+                        'name': 'file',
+                        'type': 'file',
+                        'required': True,
+                        'description': 'Image file (PNG, JPG, JPEG)',
+                        'max_size': '16MB'
+                    }
+                ],
+                'response': {
+                    'success': 'boolean',
+                    'prediction': {
+                        'result': 'string (Real/Fake)',
+                        'confidence': 'number',
+                        'raw_score': 'number',
+                        'fake_probability': 'number',
+                        'real_probability': 'number'
+                    },
+                    'face_detection': {
+                        'box': 'array',
+                        'confidence': 'number',
+                        'num_faces': 'number'
+                    },
+                    'face_crop': 'string (base64)',
+                    'timestamp': 'string'
+                },
+                'error_responses': {
+                    '400': 'No file provided, invalid file type, or face detection failed',
+                    '500': 'Internal server error'
+                }
+            },
+            '/api/batch-predict': {
+                'method': 'POST',
+                'description': 'Upload multiple images for batch deepfake detection',
+                'parameters': [
+                    {
+                        'name': 'files',
+                        'type': 'files',
+                        'required': True,
+                        'description': 'Multiple image files (PNG, JPG, JPEG)',
+                        'max_files': 10,
+                        'max_size_per_file': '16MB'
+                    }
+                ],
+                'response': {
+                    'success': 'boolean',
+                    'total_files': 'number',
+                    'results': 'array of prediction objects',
+                    'timestamp': 'string'
+                },
+                'error_responses': {
+                    '400': 'No files provided or too many files',
+                    '500': 'Internal server error'
+                }
+            },
+            '/api/docs': {
+                'method': 'GET',
+                'description': 'API documentation',
+                'parameters': [],
+                'response': 'This documentation object'
+            }
+        },
+        'supported_formats': ['PNG', 'JPG', 'JPEG'],
+        'max_file_size': '16MB',
+        'face_detection': 'MTCNN with OpenCV fallback',
+        'model': 'EfficientNetB4 transfer learning',
+        'contact': 'API documentation endpoint'
+    })
+
+
 @app.route('/api/predict', methods=['POST'])
 def predict():
     """

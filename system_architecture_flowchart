@@ -1,0 +1,20 @@
+// Deepfake Detection System Architecture
+digraph {
+	rankdir=TB size=10
+	A [label="User Uploads Image" fillcolor=lightblue shape=box style=filled]
+	B [label="Face Detection
+(MTCNN)" fillcolor=lightgreen shape=box style=filled]
+	C [label="Image Preprocessing
+(Resize, Normalize)" fillcolor=lightyellow shape=box style=filled]
+	D [label="Model Inference
+(EfficientNetB4)" fillcolor=lightcoral shape=box style=filled]
+	E [label="Classification Result
+(Real/Fake + Confidence)" fillcolor=lightpink shape=box style=filled]
+	F [label="Display Results
+(Web Interface)" fillcolor=lightcyan shape=box style=filled]
+	A -> B [label=Upload]
+	B -> C [label="Detected Faces"]
+	C -> D [label="Preprocessed Images"]
+	D -> E [label=Predictions]
+	E -> F [label=Results]
+}

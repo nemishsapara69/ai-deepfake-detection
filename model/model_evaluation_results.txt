@@ -1,0 +1,11 @@
+Deepfake Detection Model Evaluation Results
+==========================================
+
+Accuracy:  0.7830
+Precision: 0.8008
+Recall:    0.7903
+F1-Score:  0.7955
+AUC-ROC:   0.4991
+
+Training completed with 50 epochs
+Model saved as: deepfake_detector_efficientnet.h5
